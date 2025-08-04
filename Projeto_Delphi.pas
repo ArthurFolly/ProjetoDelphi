@@ -32,6 +32,8 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     listaCPFs: TStringList;
+    listaCodigo : TStringList;
+    listacodigoaluno : TStringList;
   public
   end;
 
@@ -44,21 +46,34 @@ implementation
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
+//Bloco do Professor
   listaCPFs := TStringList.Create;
+  listaCodigo := TStringList.Create;
 //CPF PESSOAL DE TESTE
   listaCPFs.Add('20210857757');
+//CODIGO DE TESTE
+  listaCodigo.Add('12345');
 
+//Bloco do Aluno
+
+//Criação Da listas
+listacodigoaluno  := TStringList.Create;
+
+//Codigo do aluno
+listacodigoaluno.Add('12345');
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
   listaCPFs.Free;
+  listaCodigo.Free;
+  listacodigoaluno.Free;
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
   cpfDigitado, nomepf, codigoPF: string;
-  cpfExiste: Boolean;
+  cpfExiste,codigoExiste: Boolean;
   i: Integer;
 begin
   nomepf := EditNomePF.Text;
@@ -71,6 +86,27 @@ begin
     ShowMessage('O CPF deve ter 11 dígitos.');
     Exit;
   end;
+
+  if codigoPF = '' then  begin
+
+    ShowMessage('Não pode estar vazio.');
+    exit;
+
+  end;
+
+  //Verifica se o codigo ja está na lista
+
+  codigoExiste := listacodigo.Indexof(codigopf) <> -1;
+
+  if codigoExiste then begin
+    ShowMessage('Este Codigo já está cadastrado no sistema');
+
+  end else begin
+    listacodigo.Add(codigopf);
+    ShowMessage('Codigo cadastrado com sucesso');
+  end;
+
+
 
   // Verifica se só tem números
   for i := 1 to Length(cpfDigitado) do
@@ -97,13 +133,27 @@ begin
 end;
 
 procedure TForm1.IncluirClick(Sender: TObject);
-var
-  codigo, nome: string;
+
+//Declara as variaveis do botão do painel alunos
+var codigoaluno:String;
+codigoal:Boolean;
 begin
-  codigo := EditCodigo.Text;
-  nome := EditNome.Text;
-  // Aqui você pode adicionar código para incluir aluno, por exemplo
+  codigoaluno :=EditCodigo.Text;
+//Verifica se tem algum codigo cadastrado no sistema dos alunos
+ codigoal := listacodigoaluno.Indexof(codigoaluno) <> -1;
+
+  if codigoal then begin
+    ShowMessage('Este Codigo já está cadastrado no sistema');
+
+  end else begin
+    listacodigoaluno.Add(codigoaluno);
+    ShowMessage('Codigo cadastrado com sucesso');
+  end;
+
+
 end;
+
+
 
 end.
 

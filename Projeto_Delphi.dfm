@@ -10,6 +10,8 @@ object Form1: TForm1
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   TextHeight = 15
   object Painel: TPanel
     Left = 8
