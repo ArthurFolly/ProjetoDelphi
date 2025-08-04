@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Pagina2;
 
 type
   TForm1 = class(TForm)
@@ -22,14 +22,16 @@ type
     EditNomePF: TEdit;
     EditCPF: TEdit;
     EditCodigoPF: TEdit;
-    Button1: TButton;
+    IncluirPF: TButton;
     Label1: TLabel;
     CPF: TLabel;
     CodigoPF: TLabel;
+    Button2: TButton;
     procedure IncluirClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure IncluirPFClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     listaCPFs: TStringList;
     listaCodigo : TStringList;
@@ -43,6 +45,12 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+ Form2.Show;
+ Form1.Hide;
+end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
@@ -70,7 +78,7 @@ begin
   listacodigoaluno.Free;
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.IncluirPFClick(Sender: TObject);
 var
   cpfDigitado, nomepf, codigoPF: string;
   cpfExiste,codigoExiste: Boolean;

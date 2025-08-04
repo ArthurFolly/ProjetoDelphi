@@ -18,7 +18,7 @@ object Form1: TForm1
     Top = 8
     Width = 1129
     Height = 545
-    Color = clMaroon
+    Color = clSilver
     ParentBackground = False
     TabOrder = 0
     object Titulo: TLabel
@@ -27,9 +27,9 @@ object Form1: TForm1
       Width = 207
       Height = 32
       Caption = 'Sistema Academico'
-      Color = clWhite
+      Color = 11118807
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
+      Font.Color = clBlack
       Font.Height = -24
       Font.Name = 'Segoe UI'
       Font.Style = []
@@ -37,11 +37,11 @@ object Form1: TForm1
       ParentFont = False
     end
     object IncluirAluno: TPanel
-      Left = 136
-      Top = 96
+      Left = 184
+      Top = 95
       Width = 297
       Height = 385
-      Color = clMaroon
+      Color = 12615680
       ParentBackground = False
       TabOrder = 0
       object Alunos: TLabel
@@ -114,12 +114,12 @@ object Form1: TForm1
       Top = 96
       Width = 297
       Height = 385
-      Color = clMaroon
+      Color = 12615680
       ParentBackground = False
       TabOrder = 1
       object TextoPainelProf: TLabel
         Left = 48
-        Top = 40
+        Top = 39
         Width = 198
         Height = 30
         Caption = 'Inclus'#227'o de Professor'
@@ -158,7 +158,7 @@ object Form1: TForm1
       end
       object CodigoPF: TLabel
         Left = 24
-        Top = 241
+        Top = 245
         Width = 50
         Height = 21
         Caption = 'Codigo'
@@ -193,15 +193,24 @@ object Form1: TForm1
         TabOrder = 2
         TextHint = 'Escreva o seu codigo'
       end
-      object Button1: TButton
+      object IncluirPF: TButton
         Left = 112
         Top = 328
         Width = 75
         Height = 25
         Caption = 'Incluir'
         TabOrder = 3
-        OnClick = Button1Click
+        OnClick = IncluirPFClick
       end
     end
+  end
+  object Button2: TButton
+    Left = 544
+    Top = 261
+    Width = 75
+    Height = 25
+    Caption = 'Page2'
+    TabOrder = 1
+    OnClick = Button2Click
   end
 end
