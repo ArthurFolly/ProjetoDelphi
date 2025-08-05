@@ -27,6 +27,15 @@ type
     CPF: TLabel;
     CodigoPF: TLabel;
     Button2: TButton;
+    PainelTurmas: TPanel;
+    Button1: TButton;
+    Turmas: TLabel;
+    Label2: TLabel;
+    EditTurma: TEdit;
+    EditCodigoPFTurma: TEdit;
+    EditEstudante: TEdit;
+    CodigoProfessor: TLabel;
+    CodigoEstudante: TLabel;
     procedure IncluirClick(Sender: TObject);
     procedure IncluirPFClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -164,4 +173,3 @@ end;
 
 
 end.
-
