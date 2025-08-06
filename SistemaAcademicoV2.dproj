@@ -127,7 +127,7 @@
             <Form>Form1</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Pagina2.pas">
+        <DCCReference Include="Main.pas">
             <Form>Form2</Form>
             <FormType>dfm</FormType>
         </DCCReference>

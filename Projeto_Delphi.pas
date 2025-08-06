@@ -4,47 +4,25 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Pagina2;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
 
 type
   TForm1 = class(TForm)
     Painel: TPanel;
     Titulo: TLabel;
-    IncluirAluno: TPanel;
-    IncluirProfessor: TPanel;
-    Alunos: TLabel;
-    EditCodigo: TEdit;
-    EditNome: TEdit;
-    Codigo: TLabel;
-    Nome: TLabel;
-    Incluir: TButton;
-    TextoPainelProf: TLabel;
-    EditNomePF: TEdit;
-    EditCPF: TEdit;
-    EditCodigoPF: TEdit;
-    IncluirPF: TButton;
-    Label1: TLabel;
-    CPF: TLabel;
-    CodigoPF: TLabel;
     Button2: TButton;
-    PainelTurmas: TPanel;
-    Button1: TButton;
-    Turmas: TLabel;
-    Label2: TLabel;
-    EditTurma: TEdit;
-    EditCodigoPFTurma: TEdit;
-    EditEstudante: TEdit;
-    CodigoProfessor: TLabel;
-    CodigoEstudante: TLabel;
     procedure IncluirClick(Sender: TObject);
     procedure IncluirPFClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure IncluirDisciplinaClick(Sender: TObject);
   private
     listaCPFs: TStringList;
     listaCodigo : TStringList;
     listacodigoaluno : TStringList;
+    listacodigodisciplina : TStringlist;
+    listamateria : TStringlist;
   public
   end;
 
@@ -78,6 +56,17 @@ listacodigoaluno  := TStringList.Create;
 
 //Codigo do aluno
 listacodigoaluno.Add('12345');
+
+
+//Bloco de disciplina
+
+listacodigodisciplina := TStringList.Create;
+
+
+listamateria := TStringList.Create;
+
+
+
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -85,12 +74,14 @@ begin
   listaCPFs.Free;
   listaCodigo.Free;
   listacodigoaluno.Free;
+  listacodigodisciplina.Free;
+  listamateria.Free;
 end;
 
 procedure TForm1.IncluirPFClick(Sender: TObject);
 var
   cpfDigitado, nomepf, codigoPF: string;
-  cpfExiste,codigoExiste: Boolean;
+  cpfExiste, codigoExiste: Boolean;
   i: Integer;
 begin
   nomepf := EditNomePF.Text;
@@ -104,28 +95,14 @@ begin
     Exit;
   end;
 
-  if codigoPF = '' then  begin
-
-    ShowMessage('Não pode estar vazio.');
-    exit;
-
+  // Verifica se o código está vazio
+  if codigoPF = '' then
+  begin
+    ShowMessage('O código não pode estar vazio.');
+    Exit;
   end;
 
-  //Verifica se o codigo ja está na lista
-
-  codigoExiste := listacodigo.Indexof(codigopf) <> -1;
-
-  if codigoExiste then begin
-    ShowMessage('Este Codigo já está cadastrado no sistema');
-
-  end else begin
-    listacodigo.Add(codigopf);
-    ShowMessage('Codigo cadastrado com sucesso');
-  end;
-
-
-
-  // Verifica se só tem números
+  // Verifica se o CPF contém apenas números
   for i := 1 to Length(cpfDigitado) do
   begin
     if not (cpfDigitado[i] in ['0'..'9']) then
@@ -135,18 +112,55 @@ begin
     end;
   end;
 
-  // Verifica se o CPF já está cadastrado (indexof) procura o cpf na lista, tive que aprender
+  // Verifica se o CPF já está cadastrado
   cpfExiste := listaCPFs.IndexOf(cpfDigitado) <> -1;
-
   if cpfExiste then
   begin
     ShowMessage('Este CPF já está cadastrado.');
-  end
-  else
-  begin
-    listaCPFs.Add(cpfDigitado);
-    ShowMessage('CPF cadastrado com sucesso.');
+    Exit;
   end;
+
+  // Verifica se o código já está cadastrado
+  codigoExiste := listaCodigo.IndexOf(codigoPF) <> -1;
+  if codigoExiste then
+  begin
+    ShowMessage('Este código já está cadastrado no sistema.');
+    Exit;
+  end;
+
+  // Se chegou até aqui, adiciona os dados
+  listaCPFs.Add(cpfDigitado);
+  listaCodigo.Add(codigoPF);
+
+  ShowMessage('Professor cadastrado com sucesso.');
+end;
+
+procedure TForm1.IncluirDisciplinaClick(Sender: TObject);
+
+ var codDisciplina,nomeDisciplina: String;
+
+begin
+
+codDisciplina := EditCodigoDisciplina.Text;
+nomeDisciplina := EditDisciplina.Text;
+
+if (codDisciplina = '') or (nomeDisciplina = '') then begin
+
+ShowMessage('Preencha Todos os campos da disciplina');
+exit;
+
+
+end;
+
+//Sempre adiciona uma disciplina
+
+listacodigodisciplina.Add(codDisciplina);
+listamateria.Add(nomeDisciplina);
+
+ShowMessage('Disciplina cadastrada com sucesso');
+
+
+
 end;
 
 procedure TForm1.IncluirClick(Sender: TObject);

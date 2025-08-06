@@ -3,7 +3,7 @@ program SistemaAcademicoV2;
 uses
   Vcl.Forms,
   Projeto_Delphi in 'Projeto_Delphi.pas' {Form1},
-  Pagina2 in 'Pagina2.pas' {Form2};
+  Main in 'Main.pas' {Form2};
 
 {$R *.res}
 
