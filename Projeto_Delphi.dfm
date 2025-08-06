@@ -47,9 +47,9 @@ object Form1: TForm1
       object Alunos: TLabel
         Left = 56
         Top = 40
-        Width = 173
+        Width = 176
         Height = 30
-        Caption = 'Inclus'#227'o de alunos'
+        Caption = 'Inclus'#227'o de Alunos'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
         Font.Height = -21
