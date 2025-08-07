@@ -1,7 +1,7 @@
-object Form2: TForm2
+object FMain: TFMain
   Left = 0
   Top = 0
-  Caption = 'Form2'
+  Caption = 'FMain'
   ClientHeight = 601
   ClientWidth = 1120
   Color = clBtnFace
@@ -24,7 +24,7 @@ object Form2: TForm2
       Top = 1
       Width = 1119
       Height = 594
-      ActivePage = Turmas
+      ActivePage = Matriculas
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -37,7 +37,7 @@ object Form2: TForm2
         Caption = 'Aluno'
         object PanelEstudante: TPanel
           Left = 0
-          Top = 0
+          Top = 3
           Width = 1161
           Height = 569
           Color = 12615680
@@ -73,7 +73,7 @@ object Form2: TForm2
             Left = 128
             Top = 160
             Width = 249
-            Height = 49
+            Height = 33
             TabOrder = 0
             TextHint = 'Codigo'
           end
@@ -94,17 +94,18 @@ object Form2: TForm2
             Left = 128
             Top = 285
             Width = 249
-            Height = 49
+            Height = 33
             TabOrder = 2
             TextHint = 'Coloque seu nome completo'
           end
           object adicionar: TButton
-            Left = 136
+            Left = 128
             Top = 448
             Width = 193
             Height = 57
             Caption = 'Adicionar'
             TabOrder = 3
+            OnClick = adicionarClick
           end
           object Editar: TButton
             Left = 504
@@ -113,6 +114,7 @@ object Form2: TForm2
             Height = 57
             Caption = 'Editar'
             TabOrder = 4
+            OnClick = EditarClick
           end
           object Excluir: TButton
             Left = 864
@@ -121,6 +123,7 @@ object Form2: TForm2
             Height = 57
             Caption = 'Excluir'
             TabOrder = 5
+            OnClick = ExcluirClick
           end
         end
       end
@@ -175,18 +178,19 @@ object Form2: TForm2
             ParentFont = False
           end
           object AdicionarPF: TButton
-            Left = 144
+            Left = 136
             Top = 456
             Width = 193
             Height = 57
             Caption = 'Adicionar'
             TabOrder = 0
+            OnClick = AdicionarPFClick
           end
           object EditCodigoPF: TEdit
             Left = 136
             Top = 133
             Width = 249
-            Height = 49
+            Height = 33
             TabOrder = 1
             TextHint = 'Escreva o codigo'
           end
@@ -197,6 +201,7 @@ object Form2: TForm2
             Height = 57
             Caption = 'Excluir'
             TabOrder = 2
+            OnClick = ExcluirPFClick
           end
           object EditarPF: TButton
             Left = 512
@@ -205,12 +210,13 @@ object Form2: TForm2
             Height = 57
             Caption = 'Editar'
             TabOrder = 3
+            OnClick = EditarPFClick
           end
           object EditCPF: TEdit
             Left = 136
             Top = 324
             Width = 249
-            Height = 49
+            Height = 33
             TabOrder = 4
             TextHint = 'Digite seu CPF'
           end
@@ -231,7 +237,7 @@ object Form2: TForm2
             Left = 136
             Top = 221
             Width = 249
-            Height = 49
+            Height = 33
             TabOrder = 6
             TextHint = 'Coloque seu nome completo'
           end
@@ -278,7 +284,7 @@ object Form2: TForm2
             Left = 128
             Top = 156
             Width = 249
-            Height = 61
+            Height = 33
             TabOrder = 0
             TextHint = 'Codigo'
           end
@@ -299,7 +305,7 @@ object Form2: TForm2
             Left = 128
             Top = 261
             Width = 249
-            Height = 60
+            Height = 33
             TabOrder = 2
             TextHint = 'Nome d'#225' materia'
           end
@@ -333,19 +339,19 @@ object Form2: TForm2
         Caption = 'Turmas'
         ImageIndex = 3
         object Panel2: TPanel
-          Left = -50
-          Top = -15
-          Width = 1161
-          Height = 569
+          Left = 3
+          Top = 4
+          Width = 1108
+          Height = 550
           Color = 12615680
           ParentBackground = False
           TabOrder = 0
-          object Label1: TLabel
-            Left = 128
-            Top = 125
-            Width = 159
+          object CodigoTurma: TLabel
+            Left = 136
+            Top = 93
+            Width = 61
             Height = 25
-            Caption = 'Codigo Da Materia'
+            Caption = 'Codigo'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
             Font.Height = -19
@@ -353,12 +359,12 @@ object Form2: TForm2
             Font.Style = []
             ParentFont = False
           end
-          object Label2: TLabel
-            Left = 128
-            Top = 230
-            Width = 149
+          object CodigoProfessor: TLabel
+            Left = 136
+            Top = 190
+            Width = 172
             Height = 25
-            Caption = 'Nome D'#225' Materia'
+            Caption = 'Codigo do Professor'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWhite
             Font.Height = -19
@@ -366,20 +372,65 @@ object Form2: TForm2
             Font.Style = []
             ParentFont = False
           end
-          object Edit1: TEdit
-            Left = 128
-            Top = 156
+          object CodigoEstudante: TLabel
+            Left = 136
+            Top = 293
+            Width = 176
+            Height = 25
+            Caption = 'Codigo do Estudante'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -19
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+          end
+          object BtoAdcTurma: TButton
+            Left = 144
+            Top = 456
+            Width = 193
+            Height = 57
+            Caption = 'Adicionar'
+            TabOrder = 0
+          end
+          object EditCodigoTrm: TEdit
+            Left = 136
+            Top = 133
             Width = 249
             Height = 33
-            TabOrder = 0
-            TextHint = 'Codigo'
+            TabOrder = 1
+            TextHint = 'Escreva o codigo'
+          end
+          object BtoEditarTurma: TButton
+            Left = 872
+            Top = 456
+            Width = 169
+            Height = 57
+            Caption = 'Excluir'
+            TabOrder = 2
+          end
+          object BtoExcluirTurma: TButton
+            Left = 512
+            Top = 456
+            Width = 169
+            Height = 57
+            Caption = 'Editar'
+            TabOrder = 3
+          end
+          object EditEstudanteTurma: TEdit
+            Left = 136
+            Top = 324
+            Width = 249
+            Height = 33
+            TabOrder = 4
+            TextHint = 'Codigo Estudante'
           end
           object StringGrid4: TStringGrid
-            Left = 504
-            Top = 125
+            Left = 512
+            Top = 133
             Width = 529
             Height = 297
-            TabOrder = 1
+            TabOrder = 5
             RowHeights = (
               24
               24
@@ -387,37 +438,126 @@ object Form2: TForm2
               24
               24)
           end
-          object Edit2: TEdit
-            Left = 128
-            Top = 261
+          object EditCodigoPFTurma: TEdit
+            Left = 136
+            Top = 221
             Width = 249
             Height = 33
-            TabOrder = 2
-            TextHint = 'Nome d'#225' materia'
+            TabOrder = 6
+            TextHint = 'Codigo Professor'
           end
-          object Button1: TButton
+        end
+      end
+      object Matriculas: TTabSheet
+        Caption = 'Matriculas'
+        ImageIndex = 4
+        object Panel3: TPanel
+          Left = 3
+          Top = 4
+          Width = 1108
+          Height = 550
+          Color = 12615680
+          ParentBackground = False
+          TabOrder = 0
+          object CodigoMatricula: TLabel
             Left = 136
-            Top = 448
+            Top = 93
+            Width = 61
+            Height = 25
+            Caption = 'Codigo'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -19
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+          end
+          object CodigoDaTurma: TLabel
+            Left = 136
+            Top = 190
+            Width = 148
+            Height = 25
+            Caption = 'Codigo Da Turma'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -19
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+          end
+          object CodigoEstudanteTurma: TLabel
+            Left = 136
+            Top = 293
+            Width = 149
+            Height = 25
+            Caption = 'Codigo Estudante'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -19
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+          end
+          object BtoAdcMatriculas: TButton
+            Left = 144
+            Top = 456
             Width = 193
             Height = 57
             Caption = 'Adicionar'
-            TabOrder = 3
+            TabOrder = 0
           end
-          object Button2: TButton
-            Left = 504
-            Top = 448
-            Width = 169
-            Height = 57
-            Caption = 'Editar'
-            TabOrder = 4
+          object EditCodigoMatricula: TEdit
+            Left = 136
+            Top = 133
+            Width = 249
+            Height = 33
+            TabOrder = 1
+            TextHint = 'Escreva o codigo'
           end
-          object Button3: TButton
-            Left = 864
-            Top = 448
+          object BtoExcluirMatriculas: TButton
+            Left = 872
+            Top = 456
             Width = 169
             Height = 57
             Caption = 'Excluir'
+            TabOrder = 2
+          end
+          object BtoEditarMatriculas: TButton
+            Left = 512
+            Top = 456
+            Width = 169
+            Height = 57
+            Caption = 'Editar'
+            TabOrder = 3
+          end
+          object EditCodigoEstudante: TEdit
+            Left = 136
+            Top = 324
+            Width = 249
+            Height = 33
+            TabOrder = 4
+            TextHint = 'Codigo Estudante'
+          end
+          object StringGrid5: TStringGrid
+            Left = 512
+            Top = 133
+            Width = 529
+            Height = 297
             TabOrder = 5
+            RowHeights = (
+              24
+              24
+              24
+              24
+              24)
+          end
+          object EditCodigoTurma: TEdit
+            Left = 136
+            Top = 221
+            Width = 249
+            Height = 33
+            TabOrder = 6
+            TextHint = 'Codigo Turma'
           end
         end
       end

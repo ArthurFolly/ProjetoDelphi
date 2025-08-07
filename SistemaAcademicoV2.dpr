@@ -2,15 +2,23 @@ program SistemaAcademicoV2;
 
 uses
   Vcl.Forms,
-  Projeto_Delphi in 'Projeto_Delphi.pas' {Form1},
-  Main in 'Main.pas' {Form2};
+  Main in 'Main.pas' {FMain},
+  UEstudante in 'UEstudante.pas' {FEstudantes},
+  UProfessor in 'UProfessor.pas' {FProfessor},
+  UDisciplinas in 'UDisciplinas.pas' {FDisciplinas},
+  UTurmas in 'UTurmas.pas' {FTurmas},
+  UMatriculas in 'UMatriculas.pas' {FMatriculas};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
-  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TFMain, FMain);
+  Application.CreateForm(TFEstudantes, FEstudantes);
+  Application.CreateForm(TFProfessor, FProfessor);
+  Application.CreateForm(TFDisciplinas, FDisciplinas);
+  Application.CreateForm(TFTurmas, FTurmas);
+  Application.CreateForm(TFMatriculas, FMatriculas);
   Application.Run;
 end.

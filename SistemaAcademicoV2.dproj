@@ -103,6 +103,8 @@
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
@@ -123,12 +125,28 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="Projeto_Delphi.pas">
-            <Form>Form1</Form>
+        <DCCReference Include="Main.pas">
+            <Form>FMain</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Main.pas">
-            <Form>Form2</Form>
+        <DCCReference Include="UEstudante.pas">
+            <Form>FEstudantes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UProfessor.pas">
+            <Form>FProfessor</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UDisciplinas.pas">
+            <Form>FDisciplinas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UTurmas.pas">
+            <Form>FTurmas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="UMatriculas.pas">
+            <Form>FMatriculas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">
@@ -151,6 +169,10 @@
                 <Source>
                     <Source Name="MainSource">SistemaAcademicoV2.dpr</Source>
                 </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k290.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp290.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
                 <DeployFile LocalName="Win32\Debug\SistemaAcademicoV2.exe" Configuration="Debug" Class="ProjectOutput">

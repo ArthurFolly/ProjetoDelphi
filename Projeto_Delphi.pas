@@ -33,6 +33,8 @@ implementation
 
 {$R *.dfm}
 
+uses Main;
+
 procedure TForm1.Button2Click(Sender: TObject);
 begin
  Form2.Show;
