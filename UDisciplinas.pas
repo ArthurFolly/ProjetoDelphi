@@ -12,11 +12,11 @@ type
     CodigoMateria: TLabel;
     NomeMateria: TLabel;
     EditCodigoDisciplina: TEdit;
-    StringGrid2: TStringGrid;
     EditNomeMateria: TEdit;
     BtoAdicionar: TButton;
     BtoEditar: TButton;
     BtoExcluir: TButton;
+    ListBox1: TListBox;
   private
     { Private declarations }
   public

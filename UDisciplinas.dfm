@@ -53,25 +53,12 @@ object FDisciplinas: TFDisciplinas
       TabOrder = 0
       TextHint = 'Codigo'
     end
-    object StringGrid2: TStringGrid
-      Left = 504
-      Top = 125
-      Width = 529
-      Height = 297
-      TabOrder = 1
-      RowHeights = (
-        24
-        24
-        24
-        24
-        24)
-    end
     object EditNomeMateria: TEdit
       Left = 128
       Top = 261
       Width = 249
       Height = 23
-      TabOrder = 2
+      TabOrder = 1
       TextHint = 'Nome d'#225' materia'
     end
     object BtoAdicionar: TButton
@@ -80,7 +67,7 @@ object FDisciplinas: TFDisciplinas
       Width = 193
       Height = 57
       Caption = 'Adicionar'
-      TabOrder = 3
+      TabOrder = 2
     end
     object BtoEditar: TButton
       Left = 504
@@ -88,7 +75,7 @@ object FDisciplinas: TFDisciplinas
       Width = 169
       Height = 57
       Caption = 'Editar'
-      TabOrder = 4
+      TabOrder = 3
     end
     object BtoExcluir: TButton
       Left = 864
@@ -96,6 +83,14 @@ object FDisciplinas: TFDisciplinas
       Width = 169
       Height = 57
       Caption = 'Excluir'
+      TabOrder = 4
+    end
+    object ListBox1: TListBox
+      Left = 592
+      Top = 136
+      Width = 409
+      Height = 265
+      ItemHeight = 15
       TabOrder = 5
     end
   end

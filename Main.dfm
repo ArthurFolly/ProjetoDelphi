@@ -21,25 +21,30 @@ object FMain: TFMain
       Caption = 'Cadastro'
       object Cadastro2: TMenuItem
         Caption = 'Estudantes'#10#10
-        OnClick = Cadastro2Click
+        OnClick = Estudante2Click
       end
       object Professores1: TMenuItem
         Caption = 'Professores'
+        OnClick = Professores1Click
       end
       object Disciplinas1: TMenuItem
         Caption = 'Disciplinas'
+        OnClick = Disciplinas1Click
       end
       object urmas1: TMenuItem
         Caption = 'Turmas'
+        OnClick = urmas1Click
       end
       object Matrculas1: TMenuItem
         Caption = 'Matr'#237'culas'
+        OnClick = Matrculas1Click
       end
       object Matrculas2: TMenuItem
         Caption = '-'
       end
       object Sair1: TMenuItem
         Caption = 'Sair'
+        OnClick = Sair1Click
       end
     end
     object Sobre1: TMenuItem

@@ -11,12 +11,13 @@ type
     PanelEstudante: TPanel;
     CodigoAluno: TLabel;
     Nome: TLabel;
-    Codigo: TEdit;
-    StringGrid1: TStringGrid;
-    NomeAluno: TEdit;
-    adicionar: TButton;
-    Editar: TButton;
-    Excluir: TButton;
+    edtCodigo: TEdit;
+    edtNome: TEdit;
+    btnAdicionar: TButton;
+    btnEditar: TButton;
+    btnExcluir: TButton;
+    lbEstudantes: TListBox;
+    btnListar: TButton;
   private
     { Private declarations }
   public
@@ -37,13 +38,6 @@ end.
 
 
 
-type TEstudanteSet = class
-
-protected
-
-
-Nome:String;
-CodigoAluno:String;
 
 end;
 

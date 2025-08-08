@@ -45,7 +45,7 @@ object FEstudantes: TFEstudantes
       Font.Style = []
       ParentFont = False
     end
-    object Codigo: TEdit
+    object edtCodigo: TEdit
       Left = 128
       Top = 160
       Width = 249
@@ -53,50 +53,53 @@ object FEstudantes: TFEstudantes
       TabOrder = 0
       TextHint = 'Codigo'
     end
-    object StringGrid1: TStringGrid
-      Left = 504
-      Top = 125
-      Width = 529
-      Height = 297
-      TabOrder = 1
-      RowHeights = (
-        24
-        24
-        24
-        24
-        24)
-    end
-    object NomeAluno: TEdit
+    object edtNome: TEdit
       Left = 128
       Top = 285
       Width = 249
       Height = 23
-      TabOrder = 2
+      TabOrder = 1
       TextHint = 'Coloque seu nome completo'
     end
-    object adicionar: TButton
+    object btnAdicionar: TButton
       Left = 128
       Top = 448
       Width = 193
       Height = 57
       Caption = 'Adicionar'
-      TabOrder = 3
+      TabOrder = 2
     end
-    object Editar: TButton
-      Left = 504
+    object btnEditar: TButton
+      Left = 368
       Top = 448
       Width = 169
       Height = 57
       Caption = 'Editar'
-      TabOrder = 4
+      TabOrder = 3
     end
-    object Excluir: TButton
-      Left = 864
+    object btnExcluir: TButton
+      Left = 568
       Top = 448
       Width = 169
       Height = 57
       Caption = 'Excluir'
+      TabOrder = 4
+    end
+    object lbEstudantes: TListBox
+      Left = 592
+      Top = 96
+      Width = 377
+      Height = 257
+      ItemHeight = 15
       TabOrder = 5
+    end
+    object btnListar: TButton
+      Left = 776
+      Top = 448
+      Width = 169
+      Height = 57
+      Caption = 'Listar'
+      TabOrder = 6
     end
   end
 end
