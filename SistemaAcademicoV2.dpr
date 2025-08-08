@@ -2,6 +2,7 @@ program SistemaAcademicoV2;
 
 uses
   Vcl.Forms,
+  Vcl.ExtCtrls,     // <- garante que TPanel esteja registrado ao iniciar o app
   Main in 'Main.pas' {FMain},
   uEstudante in 'uEstudante.pas' {FEstudantes},
   uProfessor in 'uProfessor.pas' {FProfessor},
@@ -14,11 +15,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TFMain, FMain);
-  Application.CreateForm(TFEstudantes, FEstudantes);
-  Application.CreateForm(TFProfessor, FProfessor);
-  Application.CreateForm(TFDisciplinas, FDisciplinas);
-  Application.CreateForm(TFTurmas, FTurmas);
-  Application.CreateForm(TFMatriculas, FMatriculas);
+  Application.CreateForm(TFMain, FMain); // só o principal
   Application.Run;
 end.
+
