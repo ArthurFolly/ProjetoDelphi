@@ -19,7 +19,7 @@ type
     procedure btnEditarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnListarClick(Sender: TObject);
-    procedure lbEstudantesClick(Sender: TObject);
+    procedure btnAdicionarClick(Sender: TObject);
   private
 
     FArquivo: string;
@@ -140,20 +140,81 @@ begin
     end;
   finally
     lbEstudantes.Items.EndUpdate;
+  end;
 
 end;
 
 procedure TFEstudantes.LimparCampos;
 begin
+  edtCodigo.Clear;
+  edtNome.Clear;
+  edtCodigo.SetFocus;
 
 end;
 
 //Eventos dos Botoes
 
-procedure TFEstudantes.btnEditarClick(Sender: TObject);
+procedure TFEstudantes.btnAdicionarClick(Sender: TObject);
+var
+  Cod: Integer;
+  Nome: string;
 begin
-  //
+  EnsureLista;
+
+  // Lê os campos
+  Cod  := StrToIntDef(Trim(edtCodigo.Text), 0);
+  Nome := Trim(edtNome.Text);
+
+//Validação
+  if Cod = 0 then
+  begin
+    MessageDlg('Informe um código numérico válido.', mtWarning, [mbOK], 0);
+    Exit;
+  end;
+
+  if Nome = '' then
+  begin
+    MessageDlg('Informe o nome.', mtWarning, [mbOK], 0);
+    Exit;
+  end;
+
+  Carregar; // pega a versão mais atual do arquivo
+
+  // IF para verificar se já não tem o mesmo codigo
+  if IndexPorCodigo(Cod) <> -1 then
+  begin
+    MessageDlg('Já existe estudante com esse código.', mtInformation, [mbOK], 0);
+    Exit;
+  end;
+
+  // Adiciona na memória e salva
+  FLista.Add(MontarLinha(Cod, Nome));
+  Salvar;
+
+  // Reflete na tela e limpa os edits
+  AtualizarListaUI;
+  LimparCampos;
 end;
+
+
+
+
+procedure TFEstudantes.btnEditarClick(Sender: TObject);
+var
+ Idx,Cod:Integer;
+ Nome,NomeLido: string;
+
+begin
+
+  EnsureLista;
+
+  Nome :=Trim(edtNome.Text); //Trim serve para remover os espaços em brancos
+  if Nome = '' then begin
+    MessageDlg('Informe o novo nome.',  mtWarning, [mbOK],0); //mtwarning cria uma tela de aviso e mbok cria um botao de ok
+  end;exit;
+
+end;
+
 
 procedure TFEstudantes.btnExcluirClick(Sender: TObject);
 begin
@@ -161,11 +222,6 @@ begin
 end;
 
 procedure TFEstudantes.btnListarClick(Sender: TObject);
-begin
-  //
-end;
-
-procedure TFEstudantes.lbEstudantesClick(Sender: TObject);
 begin
   //
 end;

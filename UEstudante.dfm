@@ -35,6 +35,7 @@ object FEstudantes: TFEstudantes
     Height = 28
     Caption = 'Adicionar'
     TabOrder = 2
+    OnClick = btnAdicionarClick
   end
   object btnEditar: TButton
     Left = 120
@@ -70,6 +71,5 @@ object FEstudantes: TFEstudantes
     Height = 300
     ItemHeight = 15
     TabOrder = 6
-    OnClick = lbEstudantesClick
   end
 end
