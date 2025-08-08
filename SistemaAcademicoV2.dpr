@@ -3,11 +3,11 @@ program SistemaAcademicoV2;
 uses
   Vcl.Forms,
   Main in 'Main.pas' {FMain},
-  UEstudante in 'UEstudante.pas' {FEstudantes},
-  UProfessor in 'UProfessor.pas' {FProfessor},
-  UDisciplinas in 'UDisciplinas.pas' {FDisciplinas},
-  UTurmas in 'UTurmas.pas' {FTurmas},
-  UMatriculas in 'UMatriculas.pas' {FMatriculas};
+  uEstudante in 'uEstudante.pas' {FEstudantes},
+  uProfessor in 'uProfessor.pas' {FProfessor},
+  uDisciplinas in 'uDisciplinas.pas' {FDisciplinas},
+  uTurmas in 'uTurmas.pas' {FTurmas},
+  uMatriculas in 'uMatriculas.pas' {FMatriculas};
 
 {$R *.res}
 

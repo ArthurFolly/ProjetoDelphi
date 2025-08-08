@@ -1,4 +1,4 @@
-unit UProfessor;
+unit uProfessor;
 
 interface
 

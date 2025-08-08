@@ -129,23 +129,23 @@
             <Form>FMain</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="UEstudante.pas">
+        <DCCReference Include="uEstudante.pas">
             <Form>FEstudantes</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="UProfessor.pas">
+        <DCCReference Include="uProfessor.pas">
             <Form>FProfessor</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="UDisciplinas.pas">
+        <DCCReference Include="uDisciplinas.pas">
             <Form>FDisciplinas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="UTurmas.pas">
+        <DCCReference Include="uTurmas.pas">
             <Form>FTurmas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="UMatriculas.pas">
+        <DCCReference Include="uMatriculas.pas">
             <Form>FMatriculas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
