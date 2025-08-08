@@ -15,8 +15,8 @@ object FMain: TFMain
   Position = poScreenCenter
   TextHeight = 15
   object MainMenu1: TMainMenu
-    Left = 552
-    Top = 304
+    Left = 544
+    Top = 296
     object Cadastro1: TMenuItem
       Caption = 'Cadastro'
       object Cadastro2: TMenuItem
