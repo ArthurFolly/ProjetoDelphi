@@ -2,8 +2,8 @@ object FEstudantes: TFEstudantes
   Left = 0
   Top = 0
   Caption = 'Estudantes'
-  ClientHeight = 350
-  ClientWidth = 738
+  ClientHeight = 360
+  ClientWidth = 520
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,26 +11,31 @@ object FEstudantes: TFEstudantes
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poScreenCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  DesignSize = (
+    520
+    360)
   TextHeight = 15
   object edtCodigo: TEdit
-    Left = 24
-    Top = 24
+    Left = 16
+    Top = 16
     Width = 120
     Height = 23
     TabOrder = 0
-    TextHint = 'C'#195#179'digo'
+    TextHint = 'C'#243'digo'
   end
   object edtNome: TEdit
-    Left = 24
-    Top = 60
-    Width = 378
+    Left = 16
+    Top = 48
+    Width = 360
     Height = 23
     TabOrder = 1
     TextHint = 'Nome'
   end
   object btnAdicionar: TButton
-    Left = 24
-    Top = 100
+    Left = 16
+    Top = 88
     Width = 90
     Height = 28
     Caption = 'Adicionar'
@@ -38,8 +43,8 @@ object FEstudantes: TFEstudantes
     OnClick = btnAdicionarClick
   end
   object btnEditar: TButton
-    Left = 120
-    Top = 100
+    Left = 112
+    Top = 88
     Width = 90
     Height = 28
     Caption = 'Editar'
@@ -47,8 +52,8 @@ object FEstudantes: TFEstudantes
     OnClick = btnEditarClick
   end
   object btnExcluir: TButton
-    Left = 216
-    Top = 100
+    Left = 208
+    Top = 88
     Width = 90
     Height = 28
     Caption = 'Excluir'
@@ -56,8 +61,8 @@ object FEstudantes: TFEstudantes
     OnClick = btnExcluirClick
   end
   object btnListar: TButton
-    Left = 312
-    Top = 100
+    Left = 304
+    Top = 88
     Width = 90
     Height = 28
     Caption = 'Listar'
@@ -65,11 +70,14 @@ object FEstudantes: TFEstudantes
     OnClick = btnListarClick
   end
   object lbEstudantes: TListBox
-    Left = 424
-    Top = 32
-    Width = 296
-    Height = 300
+    Left = 16
+    Top = 128
+    Width = 484
+    Height = 216
+    Anchors = [akLeft, akTop, akRight, akBottom]
     ItemHeight = 15
     TabOrder = 6
+    ExplicitWidth = 482
+    ExplicitHeight = 208
   end
 end

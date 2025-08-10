@@ -8,6 +8,16 @@ uses
   Vcl.Forms, Vcl.StdCtrls, Vcl.Dialogs, Vcl.Controls;
 
 type
+  // Classe simples do estudante
+  TEstudante = class
+  public
+    Codigo: Integer;  // número do aluno
+    Nome: string;     // nome do aluno
+    function ToLine: string; // "codigo;nome"
+    class function FromLine(const Linha: string; out E: TEstudante): Boolean; static; // cria a partir do texto
+  end;
+
+
   TFEstudantes = class(TForm)
     edtCodigo: TEdit;
     edtNome: TEdit;
@@ -16,24 +26,23 @@ type
     btnEditar: TButton;
     btnExcluir: TButton;
     btnListar: TButton;
+
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnAdicionarClick(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnListarClick(Sender: TObject);
-    procedure btnAdicionarClick(Sender: TObject);
+    procedure lbEstudantesClick(Sender: TObject);
   private
-
     FArquivo: string;
     FLista: TStringList;
 
-
-    procedure EnsureLista;
-    function  MontarLinha(const Cod: Integer; const Nome: string): string;
-    procedure LerLinha(const Linha: string; out Cod: Integer; out Nome: string);
-    function  IndexPorCodigo(const Cod: Integer): Integer;
     procedure Carregar;
     procedure Salvar;
     procedure AtualizarListaUI;
     procedure LimparCampos;
+    function IndexPorCodigo(const Cod: Integer): Integer; // acha pelo código
   public
   end;
 
@@ -46,184 +55,198 @@ implementation
 
 
 
-procedure TFEstudantes.EnsureLista;
+function TEstudante.ToLine: string;
 begin
-    if FArquivo = '' then begin
-       FArquivo := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0))) + 'estudantes.txt';
-      if FLista = nil then begin
-         FLista := TStringList.Create;
-      end;
-
-
-    end;
-
+  Result := IntToStr(Codigo) + ';' + Nome;
 end;
 
-function TFEstudantes.MontarLinha(const Cod: Integer; const Nome: string): string;
-begin
-
-  Result := IntToStr(Cod) + 'n' + Nome;
-end;
-
-procedure TFEstudantes.LerLinha(const Linha: string; out Cod: Integer; out Nome: string);
+class function TEstudante.FromLine(const Linha: string; out E: TEstudante): Boolean;
 var
-  p: integer;
+  p: Integer;
+  sCod, sNome: string;
 begin
-  p := Pos(';', Linha); // Encontra o delimitador de ponto e vírgula
-  if p > 0 then
-  begin
-    Cod := StrToIntDef(Copy(Linha, 1, p - 1), 0); // Obtém o código e converte para inteiro
-    Nome := Copy(Linha, p + 1, MaxInt); // Obtém o nome
-  end
-  else
-  begin
-    // Se nenhum ponto e vírgula for encontrado, define valores padrão
-    Cod := 0;
-    Nome := Linha; // ou '' se preferir
-  end;
+  Result := False;  // começa como falso
+  E := nil;         // ainda não criou
 
+  p := Pos(';', Linha);              // acha o ';'
+  if p <= 0 then Exit;               // se não tem, sai
+  sCod := Copy(Linha, 1, p - 1);     // pega código
+  sNome := Copy(Linha, p + 1, MaxInt); // pega nome
+  if (Trim(sCod) = '') or (Trim(sNome) = '') then Exit; // valida
+
+  E := TEstudante.Create;            // cria aluno
+  E.Codigo := StrToIntDef(sCod, 0);  // seta código
+  E.Nome := Trim(sNome);             // seta nome
+  Result := True;                    // deu certo
 end;
 
-
-
-function TFEstudantes.IndexPorCodigo(const Cod: Integer): Integer;
-var i,C : Integer;
-    N:String;
-begin
-  Result := -1;
-  for I := 0 to FLista.Count -1  do begin
-   // Pega a linha atual e separa o código ('C') e o nome ('N').
-    LerLinha(FLista[i],C,N);
-    // Verifica se o código que acabamos de ler ('C') é o que estamos procurando ('Cod').
-    if C = Cod then begin
-      Result := i;
-      exit;
-    end;
-
-  end;
-
-end;
+{=== Funções simples ===}
 
 procedure TFEstudantes.Carregar;
 begin
-  EnsureLista;     // garante que FLista existe
-  FLista.Clear;    // limpa a lista atual
-  if FileExists(FArquivo) then
-  FLista.LoadFromFile(FArquivo, TEncoding.UTF8); // lê do disco
+  if FLista = nil then
+    FLista := TStringList.Create; // garante a lista
+  if FArquivo = '' then
+    FArquivo := ExtractFilePath(Application.ExeName) + 'estudantes.txt'; // define o arquivo
 
+  if FileExists(FArquivo) then
+    FLista.LoadFromFile(FArquivo, TEncoding.UTF8); // carrega do disco
 end;
 
 procedure TFEstudantes.Salvar;
-
 begin
-  EnsureLista; // O papel que é garantir que a FLista Exista
-  FLista.SaveToFile(FArquivo,TEncoding .UTF8);
+  if (FLista <> nil) and (FArquivo <> '') then
+    FLista.SaveToFile(FArquivo, TEncoding.UTF8); // salva no disco
 end;
 
 procedure TFEstudantes.AtualizarListaUI;
-var   i, C: Integer;
-      N: string;
 begin
-  lbEstudantes.Items.BeginUpdate;
-  try
-    lbEstudantes.Clear;
-    for i := 0 to FLista.Count - 1 do
-    begin
-      //Separa a linha por codigo (C) e (N)
-      LerLinha(FLista[i], C, N);
-      //Adiciona o estudante  na lista visual, mostrando o código e o nome.
-      //A função Format cria um texto como "codigo - nome".
-      //Aqui, o '%d' é substituido pelo valor do codigo ('C'),
-      //e o '%s' é substituido pelo valor do nome ('N');
-      lbEstudantes.Items.Add(Format('%d - %s', [C,N]));
-
-    end;
-  finally
-    lbEstudantes.Items.EndUpdate;
-  end;
-
+  if FLista = nil then Exit;         // se não tem lista, não faz nada
+  lbEstudantes.Items.Assign(FLista); // mostra a lista na tela
 end;
 
 procedure TFEstudantes.LimparCampos;
 begin
-  edtCodigo.Clear;
-  edtNome.Clear;
-  edtCodigo.SetFocus;
-
+  edtCodigo.Clear;     // limpa código
+  edtNome.Clear;       // limpa nome
+  edtCodigo.SetFocus;  // foca no código
 end;
 
-//Eventos dos Botoes
+function TFEstudantes.IndexPorCodigo(const Cod: Integer): Integer;
+var
+  i, C: Integer;
+  p: Integer;
+  Linha: string;
+begin
+  Result := -1;                       // padrão: não achou
+  if (FLista = nil) or (Cod = 0) then Exit; // sem lista ou código 0
+  for i := 0 to FLista.Count - 1 do
+  begin
+    Linha := FLista[i];               // pega a linha
+    p := Pos(';', Linha);             // acha ';'
+    C := StrToIntDef(Copy(Linha, 1, p - 1), 0); // código da linha
+    if C = Cod then Exit(i);          // achou
+  end;
+end;
+
+
+
+procedure TFEstudantes.FormCreate(Sender: TObject);
+begin
+  // NÃO carregar aqui para obrigar usar o botão Listar
+  if FLista = nil then
+    FLista := TStringList.Create;     // cria lista vazia
+  if FArquivo = '' then
+    FArquivo := ExtractFilePath(Application.ExeName) + 'estudantes.txt'; // define caminho
+  lbEstudantes.Clear;                 // limpa a lista visual
+  // AtualizarListaUI não é necessário aqui (lista começa vazia)
+end;
+
+procedure TFEstudantes.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Salvar;           // salva ao fechar (se tiver algo)
+  if FLista <> nil then
+    FLista.Free;    // libera memória
+end;
 
 procedure TFEstudantes.btnAdicionarClick(Sender: TObject);
 var
   Cod: Integer;
   Nome: string;
 begin
-  EnsureLista;
+  Cod := StrToIntDef(edtCodigo.Text, 0); // pega código
+  Nome := Trim(edtNome.Text);            // pega nome
 
-  // Lê os campos
-  Cod  := StrToIntDef(Trim(edtCodigo.Text), 0);
-  Nome := Trim(edtNome.Text);
-
-//Validação
   if Cod = 0 then
   begin
-    MessageDlg('Informe um código numérico válido.', mtWarning, [mbOK], 0);
+    ShowMessage('Código inválido');
     Exit;
   end;
 
   if Nome = '' then
   begin
-    MessageDlg('Informe o nome.', mtWarning, [mbOK], 0);
+    ShowMessage('Nome inválido');
     Exit;
   end;
 
-  Carregar; // pega a versão mais atual do arquivo
-
-  // IF para verificar se já não tem o mesmo codigo
   if IndexPorCodigo(Cod) <> -1 then
   begin
-    MessageDlg('Já existe estudante com esse código.', mtInformation, [mbOK], 0);
+    ShowMessage('Já existe este código');
     Exit;
   end;
 
-  // Adiciona na memória e salva
-  FLista.Add(MontarLinha(Cod, Nome));
-  Salvar;
-
-  // Reflete na tela e limpa os edits
-  AtualizarListaUI;
-  LimparCampos;
+  FLista.Add(IntToStr(Cod) + ';' + Nome); // adiciona na memória
+  Salvar;                                  // salva no arquivo
+  AtualizarListaUI;                        // atualiza a tela
+  LimparCampos;                            // limpa campos
 end;
-
-
-
 
 procedure TFEstudantes.btnEditarClick(Sender: TObject);
 var
- Idx,Cod:Integer;
- Nome,NomeLido: string;
-
+  Idx, Cod: Integer;
+  Nome: string;
 begin
+  Cod := StrToIntDef(edtCodigo.Text, 0); // código a editar
+  Nome := Trim(edtNome.Text);            // novo nome
 
-  EnsureLista;
+  if Nome = '' then
+  begin
+    ShowMessage('Nome inválido');
+    Exit;
+  end;
 
-  Nome :=Trim(edtNome.Text); //Trim serve para remover os espaços em brancos
-  if Nome = '' then begin
-    MessageDlg('Informe o novo nome.',  mtWarning, [mbOK],0); //mtwarning cria uma tela de aviso e mbok cria um botao de ok
-  end;exit;
+  Idx := IndexPorCodigo(Cod);            // acha o índice
+  if Idx = -1 then
+  begin
+    ShowMessage('Código não encontrado');
+    Exit;
+  end;
 
+  FLista[Idx] := IntToStr(Cod) + ';' + Nome; // troca a linha
+  Salvar;                                    // salva
+  AtualizarListaUI;                          // atualiza a tela
 end;
 
-
 procedure TFEstudantes.btnExcluirClick(Sender: TObject);
+var
+  Idx, Cod: Integer;
 begin
-  //
+  Cod := StrToIntDef(edtCodigo.Text, 0); // código digitado
+  Idx := IndexPorCodigo(Cod);            // acha o índice
+
+  if Idx = -1 then
+  begin
+    ShowMessage('Código não encontrado');
+    Exit;
+  end;
+
+  if MessageDlg('Tem certeza?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    FLista.Delete(Idx); // remove da lista
+    Salvar;             // salva no arquivo
+    AtualizarListaUI;   // atualiza a tela
+    LimparCampos;       // limpa campos
+  end;
 end;
 
 procedure TFEstudantes.btnListarClick(Sender: TObject);
 begin
-  //
+  Carregar;           // agora SIM carrega do arquivo
+  AtualizarListaUI;   // e mostra na tela
+end;
+
+procedure TFEstudantes.lbEstudantesClick(Sender: TObject);
+var
+  Linha: string;
+  p: Integer;
+begin
+  if lbEstudantes.ItemIndex <> -1 then
+  begin
+    Linha := lbEstudantes.Items[lbEstudantes.ItemIndex]; // linha selecionada
+    p := Pos(';', Linha);                                 // separador
+    edtCodigo.Text := Copy(Linha, 1, p - 1);              // código no edit
+    edtNome.Text := Copy(Linha, p + 1, MaxInt);           // nome no edit
+  end;
 end;
 
 end.
