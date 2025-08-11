@@ -2,8 +2,8 @@ object FEstudantes: TFEstudantes
   Left = 0
   Top = 0
   Caption = 'Estudantes'
-  ClientHeight = 360
-  ClientWidth = 520
+  ClientHeight = 401
+  ClientWidth = 418
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,8 +14,8 @@ object FEstudantes: TFEstudantes
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
-    520
-    360)
+    418
+    401)
   TextHeight = 15
   object edtCodigo: TEdit
     Left = 16
@@ -70,10 +70,10 @@ object FEstudantes: TFEstudantes
     OnClick = btnListarClick
   end
   object lbEstudantes: TListBox
-    Left = 16
-    Top = 128
-    Width = 484
-    Height = 216
+    Left = 8
+    Top = 136
+    Width = 402
+    Height = 249
     Anchors = [akLeft, akTop, akRight, akBottom]
     ItemHeight = 15
     TabOrder = 6

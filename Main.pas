@@ -48,53 +48,23 @@ uses
   uEstudante, uDisciplinas, uMatriculas, uProfessor, uTurmas;
 
 procedure TFMain.Disciplinas1Click(Sender: TObject);
-var
-  LForm: TFDisciplinas;
 begin
-  // cria, mostra modal e destrói com segurança
-  LForm := TFDisciplinas.Create(Self);
-  try
-    LForm.ShowModal;
-  finally
-    LForm.Free;
-  end;
+  FDisciplinas.ShowModal;
 end;
 
 procedure TFMain.Estudante2Click(Sender: TObject);
-var
-  LForm: TFEstudantes;
 begin
-
-  LForm := TFEstudantes.Create(Self);
-  try
-    LForm.ShowModal;
-  finally
-    LForm.Free;
-  end;
+  FEstudantes.ShowModal;
 end;
 
 procedure TFMain.Matrculas1Click(Sender: TObject);
-var
-  LForm: TFMatriculas;
 begin
-  LForm := TFMatriculas.Create(Self);
-  try
-    LForm.ShowModal;
-  finally
-    LForm.Free;
-  end;
+  FMatriculas.ShowModal;
 end;
 
 procedure TFMain.Professores1Click(Sender: TObject);
-var
-  LForm: TFProfessor;
 begin
-  LForm := TFProfessor.Create(Self);
-  try
-    LForm.ShowModal;
-  finally
-    LForm.Free;
-  end;
+  FProfessores.ShowModal;
 end;
 
 procedure TFMain.Sair1Click(Sender: TObject);
@@ -103,15 +73,8 @@ begin
 end;
 
 procedure TFMain.urmas1Click(Sender: TObject);
-var
-  LForm: TFTurmas;
 begin
-  LForm := TFTurmas.Create(Self);
-  try
-    LForm.ShowModal;
-  finally
-    LForm.Free;
-  end;
+  FTurmas.ShowModal;
 end;
 
 end.

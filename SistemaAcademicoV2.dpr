@@ -16,6 +16,11 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TFMain, FMain); // só o principal
+  Application.CreateForm(TFProfessores, FProfessores);
+  Application.CreateForm(TFEstudantes, FEstudantes);
+  Application.CreateForm(TFTurmas, FTurmas);
+  Application.CreateForm(TFMatriculas, FMatriculas);
+  Application.CreateForm(TFDisciplinas, FDisciplinas);
   Application.Run;
 end.
 

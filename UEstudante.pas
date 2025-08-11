@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages,
   System.SysUtils, System.Classes, System.UITypes,
-  Vcl.Forms, Vcl.StdCtrls, Vcl.Dialogs, Vcl.Controls;
+  Vcl.Forms, Vcl.StdCtrls, Vcl.Dialogs, Vcl.Controls, UProfessor;
 
 type
   // Classe simples do estudante
