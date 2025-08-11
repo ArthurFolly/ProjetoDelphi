@@ -140,6 +140,7 @@ begin
     FArquivo := ExtractFilePath(Application.ExeName) + 'estudantes.txt'; // define caminho
   lbEstudantes.Clear;                 // limpa a lista visual
   // AtualizarListaUI não é necessário aqui (lista começa vazia)
+  Flista.LoadFromFile(FArquivo);  //  Carrega os dados antigos ja escritos
 end;
 
 procedure TFEstudantes.FormClose(Sender: TObject; var Action: TCloseAction);

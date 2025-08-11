@@ -77,7 +77,5 @@ object FEstudantes: TFEstudantes
     Anchors = [akLeft, akTop, akRight, akBottom]
     ItemHeight = 15
     TabOrder = 6
-    ExplicitWidth = 482
-    ExplicitHeight = 208
   end
 end
