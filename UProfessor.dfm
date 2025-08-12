@@ -1,82 +1,85 @@
 object FProfessores: TFProfessores
-  Left = 0
-  Top = 0
-  Caption = 'FProfessor'
-  ClientHeight = 399
-  ClientWidth = 411
+  Left = 280
+  Top = 140
+  Caption = 'Professores'
+  ClientHeight = 360
+  ClientWidth = 439
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -12
+  Font.Height = -11
   Font.Name = 'Segoe UI'
   Font.Style = []
-  DesignSize = (
-    411
-    399)
-  TextHeight = 15
+  OnClose = FormClose
+  OnCreate = FormCreate
+  TextHeight = 13
+  object edtCodigo: TEdit
+    Left = 24
+    Top = 16
+    Width = 160
+    Height = 21
+    TabOrder = 0
+    TextHint = 'C'#195#179'digo'
+  end
+  object edtNome: TEdit
+    Left = 24
+    Top = 52
+    Width = 390
+    Height = 21
+    TabOrder = 1
+    TextHint = 'Nome'
+  end
+  object edtCPF: TEdit
+    Left = 24
+    Top = 88
+    Width = 160
+    Height = 21
+    TabOrder = 2
+    TextHint = 'CPF'
+  end
   object btnAdicionar: TButton
-    Left = 16
-    Top = 111
+    Left = 24
+    Top = 128
     Width = 90
     Height = 28
     Caption = 'Adicionar'
-    TabOrder = 0
+    TabOrder = 3
+    OnClick = btnAdicionarClick
   end
   object btnEditar: TButton
-    Left = 112
-    Top = 111
+    Left = 124
+    Top = 128
     Width = 90
     Height = 28
     Caption = 'Editar'
-    TabOrder = 1
+    TabOrder = 4
+    OnClick = btnEditarClick
   end
   object btnExcluir: TButton
-    Left = 208
-    Top = 111
+    Left = 224
+    Top = 128
     Width = 90
     Height = 28
     Caption = 'Excluir'
-    TabOrder = 2
+    TabOrder = 5
+    OnClick = btnExcluirClick
   end
   object btnListar: TButton
-    Left = 304
-    Top = 111
+    Left = 324
+    Top = 128
     Width = 90
     Height = 28
     Caption = 'Listar'
-    TabOrder = 3
-  end
-  object edtCodigo: TEdit
-    Left = 8
-    Top = 8
-    Width = 120
-    Height = 23
-    TabOrder = 4
-    TextHint = 'C'#243'digo'
-  end
-  object edtNome: TEdit
-    Left = 8
-    Top = 37
-    Width = 360
-    Height = 23
-    TabOrder = 5
-    TextHint = 'Nome'
-  end
-  object lbEstudantes: TListBox
-    Left = 8
-    Top = 156
-    Width = 395
-    Height = 235
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    ItemHeight = 15
     TabOrder = 6
+    OnClick = btnListarClick
   end
-  object edtCPF: TEdit
-    Left = 8
-    Top = 66
-    Width = 121
-    Height = 23
+  object lbProfessores: TListBox
+    Left = 24
+    Top = 168
+    Width = 390
+    Height = 168
+    ItemHeight = 13
     TabOrder = 7
-    TextHint = 'Digite seu CPF'
+    OnClick = lbProfessoresClick
   end
 end
