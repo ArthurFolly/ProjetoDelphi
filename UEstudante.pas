@@ -25,7 +25,6 @@ type
     btnAdicionar: TButton;
     btnEditar: TButton;
     btnExcluir: TButton;
-    btnListar: TButton;
 
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -34,6 +33,7 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure btnListarClick(Sender: TObject);
     procedure lbEstudantesClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     FArquivo: string;
     FLista: TStringList;
@@ -143,11 +143,17 @@ begin
   Flista.LoadFromFile(FArquivo);  //  Carrega os dados antigos ja escritos
 end;
 
+procedure TFEstudantes.FormShow(Sender: TObject);
+begin
+  Carregar;           // agora SIM carrega do arquivo
+  AtualizarListaUI;   // e mostra na tela
+end;
+
 procedure TFEstudantes.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Salvar;           // salva ao fechar (se tiver algo)
-  if FLista <> nil then
-    FLista.Free;    // libera memória
+//  if FLista <> nil then
+//    FLista.Free;    // libera memória
 end;
 
 procedure TFEstudantes.btnAdicionarClick(Sender: TObject);
@@ -232,8 +238,8 @@ end;
 
 procedure TFEstudantes.btnListarClick(Sender: TObject);
 begin
-  Carregar;           // agora SIM carrega do arquivo
-  AtualizarListaUI;   // e mostra na tela
+  //Carregar;           // agora SIM carrega do arquivo
+  //AtualizarListaUI;   // e mostra na tela
 end;
 
 procedure TFEstudantes.lbEstudantesClick(Sender: TObject);

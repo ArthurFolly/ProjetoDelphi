@@ -12,6 +12,7 @@ object FProfessores: TFProfessores
   Font.Style = []
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   TextHeight = 13
   object edtCodigo: TEdit
     Left = 24
@@ -47,7 +48,7 @@ object FProfessores: TFProfessores
     OnClick = btnAdicionarClick
   end
   object btnEditar: TButton
-    Left = 124
+    Left = 180
     Top = 128
     Width = 90
     Height = 28
@@ -56,7 +57,7 @@ object FProfessores: TFProfessores
     OnClick = btnEditarClick
   end
   object btnExcluir: TButton
-    Left = 224
+    Left = 324
     Top = 128
     Width = 90
     Height = 28
@@ -64,22 +65,13 @@ object FProfessores: TFProfessores
     TabOrder = 5
     OnClick = btnExcluirClick
   end
-  object btnListar: TButton
-    Left = 324
-    Top = 128
-    Width = 90
-    Height = 28
-    Caption = 'Listar'
-    TabOrder = 6
-    OnClick = btnListarClick
-  end
   object lbProfessores: TListBox
     Left = 24
     Top = 168
     Width = 390
     Height = 168
     ItemHeight = 13
-    TabOrder = 7
+    TabOrder = 6
     OnClick = lbProfessoresClick
   end
 end

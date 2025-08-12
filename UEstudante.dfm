@@ -13,6 +13,7 @@ object FEstudantes: TFEstudantes
   Position = poScreenCenter
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   DesignSize = (
     418
     401)
@@ -34,7 +35,7 @@ object FEstudantes: TFEstudantes
     TextHint = 'Nome'
   end
   object btnAdicionar: TButton
-    Left = 16
+    Left = 32
     Top = 88
     Width = 90
     Height = 28
@@ -43,7 +44,7 @@ object FEstudantes: TFEstudantes
     OnClick = btnAdicionarClick
   end
   object btnEditar: TButton
-    Left = 112
+    Left = 168
     Top = 88
     Width = 90
     Height = 28
@@ -52,22 +53,13 @@ object FEstudantes: TFEstudantes
     OnClick = btnEditarClick
   end
   object btnExcluir: TButton
-    Left = 208
+    Left = 286
     Top = 88
     Width = 90
     Height = 28
     Caption = 'Excluir'
     TabOrder = 4
     OnClick = btnExcluirClick
-  end
-  object btnListar: TButton
-    Left = 304
-    Top = 88
-    Width = 90
-    Height = 28
-    Caption = 'Listar'
-    TabOrder = 5
-    OnClick = btnListarClick
   end
   object lbEstudantes: TListBox
     Left = 8
@@ -76,6 +68,6 @@ object FEstudantes: TFEstudantes
     Height = 249
     Anchors = [akLeft, akTop, akRight, akBottom]
     ItemHeight = 15
-    TabOrder = 6
+    TabOrder = 5
   end
 end

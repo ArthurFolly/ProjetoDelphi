@@ -4,11 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages,
-  System.SysUtils, System.Classes, System.UITypes, // para MessageDlg (mtWarning etc.)
+  System.SysUtils, System.Classes, System.UITypes,
   Vcl.Forms, Vcl.StdCtrls, Vcl.Dialogs, Vcl.Controls;
 
 type
-  // ===== Modelo bem simples =====
+
   TProfessor = class
   public
     Codigo: Integer;
@@ -18,7 +18,7 @@ type
     class function FromLine(const Linha: string; out P: TProfessor): Boolean; static;
   end;
 
-  // ===== Tela =====
+
   TFProfessores = class(TForm)
     edtCodigo: TEdit;
     edtNome: TEdit;
@@ -26,20 +26,19 @@ type
     btnAdicionar: TButton;
     btnEditar: TButton;
     btnExcluir: TButton;
-    btnListar: TButton;
     lbProfessores: TListBox;
 
-    procedure FormCreate(Sender: TObject);  // NÃO lista aqui
+    procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
     procedure btnAdicionarClick(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
-    procedure btnListarClick(Sender: TObject);
 
     procedure lbProfessoresClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
-    const ARQ = 'professores.txt'; // arquivo de dados
+    const ARQ = 'professores.txt';
 
     // arquivo
     procedure CarregarArquivo;     // lê -> ListBox
@@ -70,7 +69,7 @@ implementation
 
 {$R *.dfm}
 
-{ ===== Modelo ===== }
+
 
 function TProfessor.ToLine: string;
 begin
@@ -117,16 +116,16 @@ begin
   lbProfessores.Clear;
 end;
 
+procedure TFProfessores.FormShow(Sender: TObject);
+begin
+ // lê do arquivo e mostra na lista
+  CarregarArquivo;
+end;
+
 procedure TFProfessores.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   // salva o que está na lista quando fechar
   SalvarArquivo;
-end;
-
-procedure TFProfessores.btnListarClick(Sender: TObject);
-begin
-  // lê do arquivo e mostra na lista
-  CarregarArquivo;
 end;
 
 procedure TFProfessores.lbProfessoresClick(Sender: TObject);
@@ -273,7 +272,7 @@ begin
   end;
 end;
 
-{ ===== Helpers simples ===== }
+
 
 function TFProfessores.LinhaExibicao(Cod: Integer; const Nome, Cpf: string): string;
 begin
@@ -369,6 +368,7 @@ begin
   Result := False;
 
   // código numérico
+  // TryStrToInt - Tenta Converter o texto inteiro
   if not TryStrToInt(Trim(edtCodigo.Text), Cod) then
   begin
     MessageDlg('Informe um CÓDIGO numérico.', mtWarning, [mbOK], 0);
