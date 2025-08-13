@@ -227,7 +227,7 @@ begin
 
   if MessageDlg('Tem certeza?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
   begin
-    for i := 0 to lbDisciplinas.Items.Count - 1 do
+   for i := lbDisciplinas.Items.Count - 1 downto 0 do
     begin
       if lbDisciplinas.Selected[i] then
       begin

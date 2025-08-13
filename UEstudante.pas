@@ -80,11 +80,11 @@ begin
   Result := True;                    // deu certo
 end;
 
-{=== Funções simples ===}
+
 
 procedure TFEstudantes.Carregar;
 begin
-  if FLista = nil then
+  if FLista = nil then   //Verifica se a lista/objeto  ainda nao foi criado
     FLista := TStringList.Create; // garante a lista
   if FArquivo = '' then
     FArquivo := ExtractFilePath(Application.ExeName) + 'estudantes.txt'; // define o arquivo
@@ -133,7 +133,7 @@ end;
 
 procedure TFEstudantes.FormCreate(Sender: TObject);
 begin
-  // NÃO carregar aqui para obrigar usar o botão Listar
+
   if FLista = nil then
     FLista := TStringList.Create;     // cria lista vazia
   if FArquivo = '' then
@@ -146,7 +146,7 @@ end;
 procedure TFEstudantes.FormShow(Sender: TObject);
 begin
   Carregar;           // agora SIM carrega do arquivo
-  AtualizarListaUI;   // e mostra na tela
+ AtualizarListaUI;   // e mostra na tela
 end;
 
 procedure TFEstudantes.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -216,7 +216,7 @@ end;
 
 procedure TFEstudantes.btnExcluirClick(Sender: TObject);
 var
-  Idx, Cod: Integer;
+  Idx, Cod,i: Integer;
 begin
   Cod := StrToIntDef(edtCodigo.Text, 0); // código digitado
   Idx := IndexPorCodigo(Cod);            // acha o índice
@@ -229,12 +229,22 @@ begin
 
   if MessageDlg('Tem certeza?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
   begin
+    for i := lbEstudantes.Items.Count - 1 downto 0 do
+    begin
+      if lbEstudantes.Selected[i] then
+      begin
+        lbEstudantes.Items.Delete(i);
+      end;
+
+
     FLista.Delete(Idx); // remove da lista
     Salvar;             // salva no arquivo
     AtualizarListaUI;   // atualiza a tela
     LimparCampos;       // limpa campos
   end;
 end;
+end;
+
 
 procedure TFEstudantes.btnListarClick(Sender: TObject);
 begin

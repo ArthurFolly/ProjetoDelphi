@@ -40,15 +40,15 @@ type
   private
     const ARQ = 'professores.txt';
 
-    // arquivo
-    procedure CarregarArquivo;     // lê -> ListBox
-    procedure SalvarArquivo;       // ListBox -> arquivo
 
-    // helpers de exibição e validação
+    procedure CarregarArquivo;
+    procedure SalvarArquivo;
+
+
     function LinhaExibicao(Cod: Integer; const Nome, Cpf: string): string;
     function NormalizarCPF(const S: string): string;
 
-    // lê os edits e valida (bem simples)
+
     function LerDosEdits(out Cod: Integer; out Nome, Cpf: string): Boolean;
 
     // pega partes do texto "cod - nome - cpf" do ListBox
@@ -94,12 +94,12 @@ begin
   if not TryStrToInt(CodStr, Cod) then Exit;
 
   // resto -> "Nome;CPF"
-  Resto := Copy(S, p1+1, MaxInt);
+  Resto := Copy(S, p1+1, MaxInt); // pega tudo depois do primeiro ';'
   p2 := Pos(';', Resto);
   if p2 = 0 then Exit;
 
-  Nome := Trim(Copy(Resto, 1, p2-1));
-  Cpf  := Trim(Copy(Resto, p2+1, MaxInt));
+  Nome := Trim(Copy(Resto, 1, p2-1));  // pega do início de 'Resto' até antes de p2, remove espaços e atribui a Nome
+  Cpf  := Trim(Copy(Resto, p2+1, MaxInt)); // pega de 'Resto' a partir de p2+1 até o fim, remove espaços e atribui a Cpf
 
   P := TProfessor.Create;
   P.Codigo := Cod;
@@ -108,7 +108,7 @@ begin
   Result := True;
 end;
 
-{ ===== Form ===== }
+
 
 procedure TFProfessores.FormCreate(Sender: TObject);
 begin
@@ -222,7 +222,7 @@ begin
   end;
 end;
 
-{ ===== Arquivo ===== }
+
 
 procedure TFProfessores.CarregarArquivo;
 var
@@ -237,6 +237,7 @@ begin
     try
       SL.LoadFromFile(ARQ, TEncoding.UTF8);
       for I := 0 to SL.Count - 1 do
+      //Converte a linha em um objeto professor
         if TProfessor.FromLine(Trim(SL[I]), P) then
         begin
           lbProfessores.Items.Add(LinhaExibicao(P.Codigo, P.Nome, P.CPF));
@@ -263,7 +264,7 @@ begin
       begin
         Nome := Item_GetNome(lbProfessores.Items[I]);
         Cpf  := Item_GetCPF (lbProfessores.Items[I]);
-        SL.Add(IntToStr(Cod) + ';' + Nome + ';' + Cpf);
+        SL.Add(IntToStr(Cod) + ';' + Nome + ';' + Cpf);  // adiciona código, nome e CPF separados por ';'
       end;
     end;
     SL.SaveToFile(ARQ, TEncoding.UTF8);
@@ -354,12 +355,12 @@ var
   alvo, lista: string;
 begin
   Result := False;
-  alvo := NormalizarCPF(ACpf);
+  alvo := NormalizarCPF(ACpf); //Normaliza o CPF de entrada
   for I := 0 to lbProfessores.Items.Count - 1 do
   begin
     if I = IgnorarIndex then Continue;
     lista := Item_GetCPF(lbProfessores.Items[I]);
-    if lista = alvo then Exit(True);
+    if lista = alvo then Exit(True); // Achou o CPF
   end;
 end;
 

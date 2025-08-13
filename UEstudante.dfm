@@ -69,5 +69,6 @@ object FEstudantes: TFEstudantes
     Anchors = [akLeft, akTop, akRight, akBottom]
     ItemHeight = 15
     TabOrder = 5
+    OnClick = lbEstudantesClick
   end
 end
